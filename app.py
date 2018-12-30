@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_restful import Api
 from flask_jwt import JWT
 
@@ -28,6 +28,11 @@ def create_tables():
 
 
 jwt = JWT(app, authenticate, identity)  # /auth
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
